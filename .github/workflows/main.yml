@@ -36,7 +36,7 @@ jobs:
 
       # Step: run the python script
       - name: Run script to scrape data
-        run: python get_all_data.py
+        run: python scrape.py
 
 
       # Runs a single command using the runners shell
