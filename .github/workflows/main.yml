@@ -1,9 +1,12 @@
 # This is a basic workflow to help you get started with Actions
 
-name: CI
+name: Scrape
 
 # Controls when the workflow will run
 on:
+  schedule:
+    - cron: "*/120 * * * *" # every 120 minutes (so, every 2 hours)
+  workflow_dispatch:
   # Triggers the workflow on push or pull request events but only for the main branch
   push:
     branches: [ main ]
@@ -15,15 +18,34 @@ on:
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  # This workflow contains a single job called "build"
-  build:
+  # This workflow contains a single job called "scrape"
+  scrape:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v2
+      - name: Install pipenv
+        run: pipx install pipenv
+      - uses: actions/setup-python@v2
+        with:
+            python-version: '3.9'
+            cache: 'pipenv'
+      - run: pipenv install --python `which python`
+
+      # Step: install requirments on the cloud computer that has
+      # cloned your repo.
+      - name: Install requirements
+        run: |
+          echo python -m pip install requests
+          echo python -m pip install sqlite_utils
+
+      # Step: run the python script
+      - name: Run script to scrape data
+        run: python get_all_data.py
+
 
       # Runs a single command using the runners shell
       - name: Run a one-line script
