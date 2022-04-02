@@ -30,9 +30,10 @@ jobs:
       # Step: install requirments on the cloud computer that has
       # cloned your repo.
       - name: Install requirements
-        run: |
-          echo python -m pip install requests
-          echo python -m pip install sqlite_utils
+        run: pip install requests 
+        #run: |
+          #echo python -m pip install requests
+          #echo python -m pip install sqlite_utils
 
       # Step: run the python script
       - name: Run script to scrape data
