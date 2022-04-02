@@ -28,12 +28,12 @@ jobs:
       - run: pipenv install --python `which python`
 
 
-      - name: Install requirement: sqlite_utils
-        run: pip install sqlite_utils 
+      - name: Install sqlite_utils
+        run: pip install sqlite_utils
 
       # Step: install requirments on the cloud computer that has
       # cloned your repo.
-      - name: Install requirement: requests
+      - name: Install requests
         run: pip install requests
 
 
