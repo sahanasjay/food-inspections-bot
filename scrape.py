@@ -1,5 +1,6 @@
 import json
 import requests
+from pprint import pprint
 from sqlite_utils import Database
 
 response = requests.get('https://data.princegeorgescountymd.gov/resource/umjn-t2iz.json').json()
@@ -22,8 +23,17 @@ inspections = db["inspections"]
 
 db['inspections'].insert_all(db_list, ignore = True)
 
-for row in db["inspections"].rows_where("city = ?", ['COLLEGE PARK']):
-    print(row)
+def func():
+    main_list = []
+    for row in db.query("select * from inspections where city= 'COLLEGE PARK' and inspection_type='Food Complaint'"):
+        main_list.append(row)
+        values = ['Critical Violations observed','Non-Compliant - Violations Observed']
+        lst = [item for item in main_list if item['inspection_results'] in values]
+        return lst
+
+for_message = func()
+#for row in db["inspections"].rows_where("city = ?", ['COLLEGE PARK']):
+    #pprint(row)
 #print(response)
     #print(item['establishment_id'])
     #print(item['coordinates'])
