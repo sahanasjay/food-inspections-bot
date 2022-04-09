@@ -11,3 +11,7 @@ Looking ahead, we’ve considered allowing users in Slack to communicate directl
 3. What's the best schedule for updates?
 
 This API is updated fairly frequently, but it does not appear to be updated in real-time. While we cannot confirm this, the API has released updates on a weekly basis. Since we’re still nailing down the specifics of the API’s own schedule and we want to recognize that this schedule could change, we plan to scrape for inspections daily at 8 a.m. Often, this will likely return no new results if the API is indeed updated weekly, but if there is a stray submission, we want to be on top of it.
+
+4. A note about where we are with the bot:
+
+Working on making sure the bot only pulls most recent info from JSON API (almost there!), then must update the git actions yml file to make it run smoothly. Next step after that: making the bot responsive. 
