@@ -1,13 +1,13 @@
 # This is a basic workflow to help you get started with Actions
 
-name: Scrape
+name: Scrape-and-send-msg
 
 # Controls when the workflow will run
 on:
   push:
   workflow_dispatch:
   schedule:
-    - cron:  '*/120 * * * *'
+    - cron: "0 8 * * *" # 8 am every day
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   # This workflow contains a single job called "scrape"
@@ -36,6 +36,12 @@ jobs:
       - name: Install requests
         run: pip install requests
 
+      - name: Install slack
+        run: pip install slack
+
+      - name: Install os
+        run: pip install os 
+
 
         #run: |
           #echo python -m pip install requests
@@ -43,7 +49,7 @@ jobs:
 
       # Step: run the python script
       - name: Run script to scrape data
-        run: python scrape.py
+        run: python bot.py
 
 
       # Runs a single command using the runners shell
