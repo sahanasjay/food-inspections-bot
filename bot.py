@@ -12,7 +12,9 @@ db = Database("food_inspections.db")
 def get_ids_in_db():
     uid_list = []
     for id in db.query("""select uid from inspections"""):
-        uid_list.append(id.values())
+        tmp_lst = list(id.values())
+        
+
     return print(uid_list)
 
 get_ids_in_db()
