@@ -13,14 +13,14 @@ def get_ids_in_db():
     uid_list = []
     for id in db.query("""select uid from inspections"""):
         tmp_lst = list(id.values())
-        
+        uid_list.extend(tmp_lst)
 
-    return print(uid_list)
+    return uid_list
 
-get_ids_in_db()
+#pprint(get_ids_in_db())
 
 # function to get inspections and then add them to db and query the ones we want
-def get_inspections(uid_list):
+def get_inspections():
     response = requests.get('https://data.princegeorgescountymd.gov/resource/umjn-t2iz.json').json()
 #print(response)
 #print(type(response))
@@ -35,18 +35,22 @@ def get_inspections(uid_list):
                 item['coordinates'] = item['geocoded_column_1']['coordinates']
                 del item['geocoded_column_1']
                 del item[':@computed_region_87xh_ddyp']
-                item['uid'] = item['establishment_id']+item['inspection_date']
-                temp_list.append(item)
             else:
                 item['coordinates'] = []
-                item['uid'] = item['establishment_id']+item['inspection_date']
-                temp_list.append(item)
 
-    for item in temp_list:
-        if item['uid'] in uid_list:
-            pass
-        else:
-            db_list.append(item)
+            item['uid'] = item['establishment_id']+item['inspection_date']
+
+            if item['uid'] in uid_list:
+                pass
+            else:
+                db_list.append(item)
+
+            #db_list.append(item)
+
+        #if item['uid'] in uid_list:
+            #pass
+        #else:
+            #db_list.append(item)
         # There are no dubplicates. Deduplication code tk
     db["inspections"].insert_all(db_list, ignore = True)
 
@@ -58,7 +62,9 @@ def get_inspections(uid_list):
         lst = [item for item in main_list if item['inspection_results'] in values]
     return lst
 
-# function to send a slack message
+#print(get_inspections())
+
+# function to send a slack message. Pulls in the previous functions. 
 def send_slack_msg():
     client = WebClient()
     slack_token = os.environ["SLACK_API_TOKEN"]
@@ -75,4 +81,4 @@ def send_slack_msg():
     #You will get a SlackApiError if "ok" is False
             assert e.response["error"]
 
-#send_slack_msg()
+send_slack_msg()
