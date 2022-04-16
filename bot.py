@@ -1,4 +1,5 @@
 import os
+import re
 import json
 import requests
 from sqlite_utils import Database
@@ -7,6 +8,14 @@ from slack.errors import SlackApiError
 from pprint import pprint
 
 db = Database("food_inspections.db")
+
+def get_max_row_id():
+    for item in db.query("""select max(rowid) as row_id from inspections"""):
+        max_id = int(re.sub("]", "", re.sub("\[", "", str(list(item.values())))))
+    return max_id
+
+max_id = get_max_row_id()
+#print(max_id)
 
 # function to get a;; ids that currently exist in db
 def get_ids_in_db():
@@ -28,6 +37,7 @@ def get_inspections():
     temp_list = []
 
     uid_list = get_ids_in_db()
+    #max_id = get_max_row_id()
 
     for item in response:
         if 'COLLEGE PARK' in item['city']:
@@ -56,15 +66,19 @@ def get_inspections():
 
     main_list = []
 
-    for row in db.query("select * from inspections where inspection_type='Food Complaint'"):
-        main_list.append(row)
+    for row in db.query("select * from inspections where inspection_type = 'Food Complaint'"):
         values = ['Critical Violations observed','Non-Compliant - Violations Observed']
-        lst = [item for item in main_list if item['inspection_results'] in values]
-    return lst
+        if row["inspection_results"] in values:
+            main_list.append(row)
+        else:
+            pass
+    return main_list
 
-#print(get_inspections())
+#pprint(get_inspections())
+#new_max = get_max_row_id()
+#print(new_max)
 
-# function to send a slack message. Pulls in the previous functions. 
+# function to send a slack message. Pulls in the previous functions.
 def send_slack_msg():
     client = WebClient()
     slack_token = os.environ["SLACK_API_TOKEN"]
