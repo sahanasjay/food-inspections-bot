@@ -38,11 +38,11 @@ jobs:
       - name: Install libraries
         run: |
           pip install requests
-          pip install os
           pip install sqlite_utils
           pip install slackclient
           pip install pprint
           pip install bs4
+          pip install csv
 
 
 
