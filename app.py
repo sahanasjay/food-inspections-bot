@@ -6,7 +6,6 @@ from sqlite_utils import Database
 from slack import WebClient
 from bs4 import BeautifulSoup
 from slack.errors import SlackApiError
-from pprint import pprint
 import csv
 
 
