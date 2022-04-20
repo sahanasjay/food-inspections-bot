@@ -56,9 +56,9 @@ jobs:
         run: sh ./app.sh
       - name: Commit and push csv
         run: |-
-        git config user.name "Automated"
-        git config user.email "actions@users.noreply.github.com"
-        git add food_inspections.csv
-        timestamp=$(date -u)
-        git commit -m "Latest csv update: ${timestamp}" || exit 0
-        git push
+          git config user.name "Automated"
+          git config user.email "actions@users.noreply.github.com"
+          git add food_inspections.csv
+          timestamp=$(date -u)
+          git commit -m "Latest csv update: ${timestamp}" || exit 0
+          git push
