@@ -53,4 +53,4 @@ jobs:
 
       # Step: run the python script
       - name: Run script to scrape data
-        run: ./app.sh
+        run: sh ./app.sh
