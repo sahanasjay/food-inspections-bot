@@ -7,6 +7,7 @@ from slack import WebClient
 from bs4 import BeautifulSoup
 from slack.errors import SlackApiError
 import csv
+from pprint import pprint
 
 
 db = Database("food_inspections.db")
