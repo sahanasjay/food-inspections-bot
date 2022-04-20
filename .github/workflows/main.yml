@@ -54,11 +54,11 @@ jobs:
         env: # Or as an environment variable
           SLACK_API_TOKEN: ${{ secrets.SLACK_API_TOKEN }}
         run: sh ./app.sh
-      - name: Commit and push csv
+      - name: Commit and push csv and db
         run: |-
           git config user.name "Automated"
           git config user.email "actions@users.noreply.github.com"
-          git add food_inspections.csv
+          git add food_inspections.csv food_inspections.db
           timestamp=$(date -u)
           git commit -m "Latest csv update: ${timestamp}" || exit 0
           git push
