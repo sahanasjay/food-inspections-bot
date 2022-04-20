@@ -10,8 +10,8 @@ from pprint import pprint
 db = Database("food_inspections.db")
 
 def get_max_row_id():
-    for item in db.query("""select max(rowid) as row_id from inspections"""):
-        max_id = int(re.sub("]", "", re.sub("\[", "", str(list(item.values())))))
+    max_id = db.query("""select max(rowid) as row_id from inspections"""):
+    #max_id = int(re.sub("]", "", re.sub("\[", "", str(list(item.values())))))
     return max_id
 
 max_id = get_max_row_id()

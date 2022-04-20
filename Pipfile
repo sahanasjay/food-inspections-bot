@@ -8,6 +8,7 @@ slackclient = "*"
 requests = "*"
 sqlite-utils = "*"
 bs4 = "*"
+wget = "*"
 
 [dev-packages]
 
