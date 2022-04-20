@@ -8,11 +8,12 @@ from bs4 import BeautifulSoup
 from slack.errors import SlackApiError
 import csv
 from pprint import pprint
+from dotenv import load_dotenv
 
 
 db = Database("food_inspections.db")
 link = 'https://data.princegeorgescountymd.gov/api/views/umjn-t2iz/rows.csv?accessType=DOWNLOAD&bom=true&format=true'
-
+load_dotenv()
 #print(db.schema)
 
 def get_max_row_id():

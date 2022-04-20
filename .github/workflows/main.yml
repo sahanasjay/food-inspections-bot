@@ -41,6 +41,7 @@ jobs:
           pip install sqlite_utils
           pip install slackclient
           pip install bs4
+          pip install python-dotenv
 
 
 
