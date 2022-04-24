@@ -74,7 +74,8 @@ def send_slack_msg():
         try:
             response = client.chat_postMessage(
             channel="slack-bots",
-            text=f"🚨 Food Inspection result: {item['inspection_type']} 🚨  took place at {item['name']} on {item['inspection_date']}, and the result was {item['inspection_results']}."
+            blocks = [{"type": "section", "text": {"type": "mrkdwn", "text": f":rotating_light: Food Inspection result: *{item['inspection_results']}* :rotating_light:\n An {item['inspection_type']} inspection took place at {item['name']} on {item['inspection_date']}, and the result was {item['inspection_results']} \n For more: <https://data.princegeorgescountymd.gov/Health/Food-Inspection/umjn-t2iz|Here's the link to the data>. \n Want to file an MPIA? <https://www.princegeorgescountymd.gov/DocumentCenter/View/4629/MPIA-Request-Form-PDF| Here's a form> for that."}}]
+            #text=f"🚨 Food Inspection result: {item['inspection_type']} 🚨 Inspectiontook place at {item['name']} on {item['inspection_date']}, and the result was {item['inspection_results']}."
             )
         except SlackApiError as e:
     #You will get a SlackApiError if "ok" is False
