@@ -11,7 +11,7 @@ from pprint import pprint
 
 
 db = Database("food_inspections.db")
-link = 'https://data.princegeorgescountymd.gov/api/views/umjn-t2iz/rows.csv?accessType=DOWNLOAD&bom=true&format=true'
+
 #print(db.schema)
 
 def get_max_row_id():
@@ -74,7 +74,7 @@ def send_slack_msg():
         try:
             response = client.chat_postMessage(
             channel="slack-bots",
-            text=f"🚨 Food inspection alert 🚨 A {item['inspection_type']} inspection took place at {item['name']} on {item['inspection_date']}, and the result was {item['inspection_results']}."
+            text=f"🚨 Food Inspection result: {item['inspection_type']} 🚨  took place at {item['name']} on {item['inspection_date']}, and the result was {item['inspection_results']}."
             )
         except SlackApiError as e:
     #You will get a SlackApiError if "ok" is False
