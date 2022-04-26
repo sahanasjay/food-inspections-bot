@@ -72,7 +72,7 @@ def send_slack_msg():
     for_message = get_inspections()
     main_msg = len(for_message)
     restaurant_names = [item['name'] for item in db.query("select name from inspections where inspection_results in ('Critical Violations observed','Non-Compliant - Violations Observed') and rowid > ?", max_id)]
-    message = f":rotating_light: Food Inspection Summary :rotating_light:\n Hello <!channel>, Bot here with your weekly summary.\n This week, there were {main_msg} inspections in College Park resulting in a violation. \n Affected businesses include: {restaurant_names} \n See my :thread: for details."
+    message = f":rotating_light: *Food Inspection Summary* :rotating_light:\n Hello <!channel>, Bot here with your weekly summary.\n This week, there were *{main_msg}* inspections in College Park resulting in a violation. \n Affected businesses include: {restaurant_names} \n See my :thread: for details."
     client = WebClient()
     slack_token = os.environ["SLACK_API_TOKEN"]
     client = WebClient(token=slack_token)
@@ -103,7 +103,7 @@ def send_slack_msg():
         try:
             response = client.chat_postMessage(
             channel="slack-bots",
-            blocks = [{"type": "section", "text": {"type": "mrkdwn", "text": f":wave: Hello there! Bot here with your weekly summary. \n Nothing to report this week: There were {main_msg} inspections that resulted in a violation in College Park. Check back in next week!"}}]
+            blocks = [{"type": "section", "text": {"type": "mrkdwn", "text": f":wave: Hello there! Bot here with your weekly summary. \n *Nothing to report this week*: There were *{main_msg}* inspections that resulted in a violation in College Park. Check back in next week!"}}]
             #text=f"🚨 Food Inspection result: {item['inspection_type']} 🚨 Inspectiontook place at {item['name']} on {item['inspection_date']}, and the result was {item['inspection_results']}."
             )
         except SlackApiError as e:
