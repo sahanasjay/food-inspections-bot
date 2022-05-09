@@ -1,6 +1,6 @@
-#Food Inspections in College Park
+# Food Inspections in College Park
 
-##Overview
+## Overview
 The code in this repo builds and executes a Slack bot that pulls food inspection data from a csv published by Prince George's county snd updated once a week. Each time the bot runs, a shell script pulls down the latest version of the csv. Then, a python script — labeled app.py — parses the data and cleans it, filtering for new records of establishments in College Park and adding them to a sqlite database named food_inspections.db.  
 
 The bot goes into that db it just added to and retrieves all recent inspections that have an inspection_result of 'Critical Violations Observed" or "non-Compliant - Violations Observed.' If there are new rows (which are defined here as "rows with a date stamp later than the max date last retrieved from the database") the bot uses some for loops, functions and dictionary wrangling to send the channel:  
@@ -10,7 +10,7 @@ The bot goes into that db it just added to and retrieves all recent inspections 
 
 If there are no new records added to the database, the app still sends a message — it just tells the channel to check back in next week.
 
-##The Journey
+## The Journey
 
 Oh, what a journey this Slackbot has been! It began as a shell of what it became, a simple product @rinatorchi and I came up with  to answer the question: "What if we could alert Diamondback reporters about the latest food inspection in one of the dining halls? Or their favorite restaurants?"
 
