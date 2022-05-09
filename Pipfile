@@ -9,6 +9,7 @@ requests = "*"
 sqlite-utils = "*"
 bs4 = "*"
 wget = "*"
+dateparser = "*"
 
 [dev-packages]
 

@@ -43,6 +43,7 @@ jobs:
           pip install slackclient
           pip install bs4
           pip install python-dotenv
+          pip install dateparser
 
 
         #run: |
