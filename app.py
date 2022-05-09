@@ -82,7 +82,6 @@ def get_inspections():
 
 def send_slack_msg():
     for_message = get_inspections()
-    max_date = get_max_date()
     restaurant_names = []
     for item in for_message:
         violations = []

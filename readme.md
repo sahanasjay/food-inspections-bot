@@ -1,8 +1,11 @@
-Food Inspections in College Park
+#Food Inspections in College Park
 
-1. Do I need to store this data somehow? What would that look like?
+##Overview
+The code in this repo builds and executes a Slack bot that pulls food inspection data from a csv published by Prince George's county snd updated once a week. Each time the bot runs, a shell script pulls down the latest version of the csv. Then, a python script — labeled app.py — parses the data and cleans it, filtering for new records of establishments in College Park and adding them to a sqlite database named food_inspections.db.  
 
-This bot scrapes data from an API that stores Prince George’s County food inspections records. The bot filters the data to establishments only in College Park and pulls it into a database. Later, we might consider making this data queryable, maybe even as part of a direct chat between a user and the bot in Slack.
+The bot goes into that db it just added to and retrieves all recent inspections that have an inspection_result of 'Critical Violations Observed" or "non-Compliant - Violations Observed.' If there are new rows (which are defined here as "rows with a date stamp later than the max date last retrieved from the database") the bot uses some for loops, functions and dictionary wrangling to send the channel:  
+
+a) a main message that contains summary information: The number of inspections that resulted in a violation in College Park in the past week, and the names of impacted   the bot retrieves the data to establishments only in College Park and pulls it into a database. Later, we might consider making this data queryable, maybe even as part of a direct chat between a user and the bot in Slack.
 
 2. If this bot were able to accept input from users, what would that look like and how might it respond?
 
@@ -14,4 +17,4 @@ This API is updated fairly frequently, but it does not appear to be updated in r
 
 4. A note about where we are with the bot:
 
-Working on making sure the bot only pulls most recent info from JSON API (almost there!), then must update the git actions yml file to make it run smoothly. Next step after that: making the bot responsive. 
+Working on making sure the bot only pulls most recent info from JSON API (almost there!), then must update the git actions yml file to make it run smoothly. Next step after that: making the bot responsive.
