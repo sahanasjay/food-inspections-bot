@@ -103,7 +103,7 @@ def send_slack_msg():
     main_msg = len(for_message)
     restaurant_names = '\n- '.join(restaurant_names)
     #print(restaurant_names)
-    message = f":rotating_light: *FOOD INSPECTION SUMMARY* :rotating_light:\n\n:wave:Hello channel, Bot here with your weekly summary.\n\n This week, there were *{main_msg}* inspections in College Park resulting in a violation.\n\n Affected businesses include:\n- {restaurant_names}\n\nSee my :thread: for details."
+    message = f":rotating_light: *FOOD INSPECTION SUMMARY* :rotating_light:\n\n:wave:Hello <!channel>, Bot here with your weekly summary.\n\n This week, there were *{main_msg}* inspections in College Park resulting in a violation.\n\n Affected businesses include:\n- {restaurant_names}\n\nSee my :thread: for details."
     client = WebClient()
     #<!channel>
     slack_token = os.environ["SLACK_API_TOKEN"]
