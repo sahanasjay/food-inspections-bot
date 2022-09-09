@@ -112,7 +112,7 @@ def send_slack_msg():
     if main_msg > 0:
         try:
             response = client.chat_postMessage(
-            channel="slack-bots",
+            channel="news_desk",
             blocks = [{"type": "section", "text": {"type": "mrkdwn", "text": message}}]
             #text=f"🚨 Food Inspection result: {item['inspection_type']} 🚨 Inspection took place at {item['name']} on {item['inspection_date']}, and the result was {item['inspection_results']}."
             )
@@ -130,7 +130,7 @@ def send_slack_msg():
                 #number_violation = [item for item in db.query("select count(*) from inspections where establishment_id=? and inspection_results in ('Critical Violations observed','Non-Compliant - Violations Observed')", estab_id)]
                 #number_violation = re.sub("]", "", re.sub("\[", "", str(number_violation)))
                 response = client.chat_postMessage(
-                channel="slack-bots",
+                channel="news_desk",
                 thread_ts=ts_id,
                 blocks = [{"type": "section", "text": {"type": "mrkdwn", "text": f"A {item['inspection_type']} inspection took place at {item['name']} on {item['date']}, and the result was *{item['inspection_results']}*.\n\nThe establishment didn't comply with regulations for: \n- {violations}\n\nThis establishment has been through *{item['previous_number']}* inspections, *{item['prev_violations']}* of which resulted in a violation.\n\nThe addy: {item['address_line_1']}\n\nFor more: <https://data.princegeorgescountymd.gov/Health/Food-Inspection/umjn-t2iz|Here's the link to the data>.\n\nWant to file an MPIA? <https://www.princegeorgescountymd.gov/DocumentCenter/View/4629/MPIA-Request-Form-PDF| Here's a form> for that."}}]
                 #text=f"🚨 Food Inspection result: {item['inspection_type']} 🚨 Inspectiontook place at {item['name']} on {item['inspection_date']}, and the result was {item['inspection_results']}."
@@ -141,7 +141,7 @@ def send_slack_msg():
     else:
         try:
             response = client.chat_postMessage(
-            channel="slack-bots",
+            channel="news_desk",
             blocks = [{"type": "section", "text": {"type": "mrkdwn", "text": f":wave: Hello there! Bot here with your weekly summary.\n\n*Nothing to report this week*: There were *{main_msg}* inspections that resulted in a violation in College Park. Check back in next week!"}}]
             #text=f"🚨 Food Inspection result: {item['inspection_type']} 🚨 Inspectiontook place at {item['name']} on {item['inspection_date']}, and the result was {item['inspection_results']}."
             )
